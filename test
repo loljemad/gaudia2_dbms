@@ -30,13 +30,47 @@ datee DATE,
 client_id int,
 trans_id int,
  CONSTRAINT fkreportclientID FOREIGN KEY (client_id)
- REFERENCES clinet(client_id),
+ REFERENCES client(client_id),
  CONSTRAINT FKtransID FOREIGN KEY (trans_id)
  REFERENCES transaction_records(trans_id)
 );
 
 CREATE TABLE schedule (
 sched_id INT PRIMARY KEY AUTO_INCREMENT,
-client_id INT 
+client_id INT,
+trainor_id INT,
+schedule_session varchar(255),
+activitiy varchar(255),
+datee DATE,
+time_start INT,
+time_end INT
+CONSTRAINT FKscheduleclientid FOREIGN KEY(client_id)
+REFERENCES client (client_id),
+CONSTRAINT FKtrainorid(trainor_id)
+
+);
+
+CREATE TABLE trainor (
+trainor_ID INT PRIMARY KEY AUTO_INCREMENT,
+trainor_name varchar(255),
+sched_id INT,
+salary INT,
+email varchar(255),
+trainor_password varchar(255),
+
+);
+
+CREATE TABLE membership (
+mem_id INT PRIMARY KEY AUTO_INCREMENT,
+client_id INT FOREIGN KEY REFERENCES client(client_id),
+mem_status varchar(255),
+datee DATE
+);
+
+CREATE TABLE payment (
+payment_id INT PRIMARY KEY AUTO_INCREMENT,
+client_id INT,
+datee DATE,
+amount INT
 
 )
