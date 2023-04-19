@@ -78,15 +78,84 @@ CREATE TABLE sched (
 );
 
 
-INSERT INTO client(fname,lname) VALUES ('Jack', 'Frost');
-INSERT INTO sched (sched_session, activity, datee, time_start) VALUES ('YOW', 'racing', '2023/08/16', '8:30');
-INSERT INTO trainor(trainor_name) VALUES ('John');
 
-SELECT client.fname, client.lname, sched.sched_session, sched.activity, sched.datee, sched.time_start, sched.time_end, trainor.trainor_name 
-FROM sched sched 
-INNER JOIN client  ON client.client_id = client.client_id 
-INNER JOIN trainor  ON trainor.trainor_id = trainor.trainor_id;
 
+INSERT INTO client (fname, lname, gender, age, contact_add, email, password)
+VALUES 
+  ('dadadadada', 'Doe', 'female', 28, '123', 'jane.com', 'password1'),
+  ('John', 'Smith', 'male', 35, '456 E', 'john.com', 'password2'),
+  ('Bob', 'Johnson', 'male', 42, '789 ', 'bob.j.com', 'password3'),
+  ('Emily', 'Davis', 'female', 23, '321 ', 'jeeeee@gmaiol', 'password4'),
+  ('Mike', 'Wilson', 'male', 40, '654 ', 'm@gmail.cpm,', 'password5');
+
+
+INSERT INTO payment (client_id, datee, amount)
+VALUES 
+(1, '2022-04-19', 50),
+(2, '2022-04-18', 75),
+(3, '2022-04-17', 100),
+(4, '2022-04-16', 125),
+(5, '2022-04-15', 150);
+
+INSERT INTO membership (client_id, mem_status, datee) 
+VALUES 
+(1, 'ACTIVE', '2025-01-01'),
+(2, 'INACTIVE', '2020-02-01'),
+(3, 'ACTIVE', '2012-01-15'),
+(4, 'INACTIVE', '203-03-01'),
+(5, 'ACTIVE', '20223-02-15');
+
+INSERT INTO trainor (trainor_name, salary, email, trainor_password) VALUES
+('John Smith', 5000, 'hakdooggggg@gmail.com', '12333'),
+('Jane Doe', 6000, 'hakdooggggg@gmail.com', 'pa123'),
+('Bob Johnson', 5500, 'hakdooggggg@gmail.com', '3441'),
+('Sarah Lee', 6500, 'shakdooggggg@gmail.com', '414'),
+('Mike Brown', 7000, 'hhakdooggggg@gmail.com', '3');
+
+
+INSERT INTO transaction_records (trans_name, client_id, amount, datee)
+VALUES
+  ('Membership Fee', 1, 50, '2321'),
+  ('Training Session', 2, 75, '312312'),
+  ('Membership Fee', 3, 50, '2321'),
+  ('Training Session', 4, 75, '1233-01-04'),
+  ('Membership Fee', 5, 50, '2022-312231-05');
+  INSERT INTO sched (client_id, trainor_id, sched_session, activity, datee, time_start, time_end)
+VALUES
+(1, 2, 'Morning', 'Yoga', '2023-04-20', '08:00:00', '4'),
+(2, 1, 'Afternoon', 'Weight Lifting', '2023-04-20', '14:00:00', '5'),
+(3, 2, 'Evening', 'Cardio', '2023-04-21', '18:00:00', '6'),
+(4, 3, 'Morning', 'Boxing', '2023-04-21', '10:00:00', '2'),
+(5, 1, 'Afternoon', 'Pilates', '2023-04-22', '14:00:00', '1');
+INSERT INTO reports (total_amount, datee, client_id, trans_id)
+VALUES
+  ('100', '2022-01-01', 1, 1),
+  ('200', '2022-01-02', 2, 2),
+  ('300', '2022-01-03', 3, 3),
+  ('400', '2022-01-04', 4, 4),
+  ('500', '2022-01-05', 5, 5);
+
+
+
+
+
+
+SELECT c.fname, c.lname, s.sched_session, s.activity, s.datee, s.time_start, s.time_end, t.trainor_name 
+FROM sched s
+INNER JOIN client c ON c.client_id = s.client_id 
+INNER JOIN trainor t ON t.trainor_id = s.trainor_id;
+
+
+
+SELECT client.fname, client.lname, 
+    IFNULL(SUM(transaction_records.amount), 0) AS total_amount_to_pay, 
+    IFNULL(payment.amount, 0) AS amount_paid, 
+    IFNULL(membership.mem_status, 'INACTIVE') AS active_membership
+FROM client
+LEFT JOIN transaction_records ON client.client_id = transaction_records.client_id
+LEFT JOIN payment ON client.client_id = payment.client_id
+LEFT JOIN membership ON client.client_id = membership.client_id
+GROUP BY client.client_id;
 
 
 
