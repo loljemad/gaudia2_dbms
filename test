@@ -21,6 +21,16 @@ amount int,
 datee DATE,
 CONSTRAINT FKclientID FOREIGN KEY(client_id)
 REFERENCES client(client_id),
+);
 
-
-)
+CREATE TABLE reports (
+report_id INT PRIMARY KEY AUTO_INCREMENT,
+total_amount varchar(255),
+datee DATE,
+client_id int,
+trans_id int,
+ CONSTRAINT fkreportclientID FOREIGN KEY (client_id)
+ REFERENCES clinet(client_id),
+ CONSTRAINT FKtransID FOREIGN KEY (trans_id)
+ REFERENCES transaction_records(trans_id)
+);
