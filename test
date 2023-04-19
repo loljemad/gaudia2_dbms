@@ -89,11 +89,6 @@ INNER JOIN trainor  ON trainor.trainor_id = trainor.trainor_id;
 
 
 
--- INSERT INTO client(fname,lname)VALUES ('Jack', 'Frost');
--- INSERT INTO sched(sched_session,activity,datee,time_start) VALUES('bruh', 'moments', '8/19/2001', '8:15')
-
-
--- SELECT fname,lname FROM client INNER JOIN sched ON sched_session, activity, datee, time_start;
 
 
 
@@ -101,5 +96,3 @@ INNER JOIN trainor  ON trainor.trainor_id = trainor.trainor_id;
 
 
 
--- SELECT  CONCAT(client.fname, ' ', client.lname) AS Full_Name,  sched.sched_session AS Session,sched.activitiy AS Activity,sched.datee AS Date,sched.time_start AS Time_Start,trainor.trainor_name AS Name_of_Instructor
--- FROM  client INNER JOIN sched ON client.client_id = sched.client_id INNER JOIN trainor ON sched.trainor_id = trainor.trainor_ID;
