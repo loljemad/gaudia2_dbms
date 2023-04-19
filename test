@@ -34,3 +34,9 @@ trans_id int,
  CONSTRAINT FKtransID FOREIGN KEY (trans_id)
  REFERENCES transaction_records(trans_id)
 );
+
+CREATE TABLE schedule (
+sched_id INT PRIMARY KEY AUTO_INCREMENT,
+client_id INT 
+
+)
