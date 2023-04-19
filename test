@@ -82,11 +82,11 @@ CREATE TABLE sched (
 
 INSERT INTO client (fname, lname, gender, age, contact_add, email, password)
 VALUES 
-  ('dadadadada', 'Doe', 'female', 28, '123', 'jane.com', 'password1'),
-  ('John', 'Smith', 'male', 35, '456 E', 'john.com', 'password2'),
-  ('Bob', 'Johnson', 'male', 42, '789 ', 'bob.j.com', 'password3'),
-  ('Emily', 'Davis', 'female', 23, '321 ', 'jeeeee@gmaiol', 'password4'),
-  ('Mike', 'Wilson', 'male', 40, '654 ', 'm@gmail.cpm,', 'password5');
+  ('yum borgor', 'Doe', 'female', 28, '123', 'jane.com', 'password1'),
+  ('Jolllllyyy', 'Smith', 'male', 35, '456 E', 'john.com', 'password2'),
+  ('Bob', 'thebuilder', 'male', 42, '789 ', 'bob.j.com', 'password3'),
+  ('Emily', 'ketchips', 'female', 23, '321 ', 'jeeeee@gmaiol', 'password4'),
+  ('Mike', 'Ty', 'male', 40, '654 ', 'm@gmail.cpm,', 'password5');
 
 
 INSERT INTO payment (client_id, datee, amount)
@@ -106,11 +106,11 @@ VALUES
 (5, 'ACTIVE', '20223-02-15');
 
 INSERT INTO trainor (trainor_name, salary, email, trainor_password) VALUES
-('John Smith', 5000, 'hakdooggggg@gmail.com', '12333'),
-('Jane Doe', 6000, 'hakdooggggg@gmail.com', 'pa123'),
-('Bob Johnson', 5500, 'hakdooggggg@gmail.com', '3441'),
-('Sarah Lee', 6500, 'shakdooggggg@gmail.com', '414'),
-('Mike Brown', 7000, 'hhakdooggggg@gmail.com', '3');
+('yum borgor', 5000, 'hakdooggggg@gmail.com', '12333'),
+('Jano Doe', 6000, 'hakdooggggg@gmail.com', 'pa123'),
+('booooby Johnson', 5500, 'hakdooggggg@gmail.com', '3441'),
+('Sarah s', 6500, 'shakdooggggg@gmail.com', '414'),
+('Mike B', 7000, 'hhakdooggggg@gmail.com', '3');
 
 
 INSERT INTO transaction_records (trans_name, client_id, amount, datee)
