@@ -1,7 +1,7 @@
-DROP DATABASE gym;
-CREATE DATABASE gym;
+DROP DATABASE gymmanagement;
+CREATE DATABASE gymmanagement;
 
-USE gym;
+USE gymmanagement;
 
 CREATE TABLE client (
 client_id int PRIMARY KEY AUTO_INCREMENT,
@@ -51,7 +51,6 @@ time_end INT
 CREATE TABLE trainor (
 trainor_ID INT PRIMARY KEY AUTO_INCREMENT,
 trainor_name varchar(255),
-
 salary INT,
 email varchar(255),
 trainor_password varchar(255)
@@ -74,7 +73,8 @@ amount INT
 );
 
 
-
+INSERT INTO client(fname, lname) VALUES ('JACK', 'FROST');
+INSERT INTO schedule(schedule_session, activity, datee, time_start) VALUES ('123', '123', 'HELL', '12/13/2001', '8:30')
 
 -- INSERT INTO client(fname,lname)VALUES ('Jack', 'Frost');
 -- INSERT INTO schedule(schedule_session,activity,datee,time_start) VALUES('bruh', 'moments', '8/19/2001', '8:15')
