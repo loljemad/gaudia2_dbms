@@ -62,38 +62,44 @@ CREATE TABLE payment (
     REFERENCES client(client_id)
 );
 
-CREATE TABLE schedule (
+CREATE TABLE sched (
   sched_id INT PRIMARY KEY AUTO_INCREMENT,
   client_id INT,
   trainor_id INT,
-  schedule_session VARCHAR(255),
+  sched_session VARCHAR(255),
   activity VARCHAR(255),
   datee DATE,
   time_start TIME,
   time_end TIME,
-  CONSTRAINT FKscheduled_client FOREIGN KEY (client_id)
+  CONSTRAINT FKschedd_client FOREIGN KEY (client_id)
     REFERENCES client(client_id),
-  CONSTRAINT FKscheduled_trainor FOREIGN KEY (trainor_id)
+  CONSTRAINT FKschedd_trainor FOREIGN KEY (trainor_id)
     REFERENCES trainor(trainor_id)
 );
 
 
-INSERT INTO client(fname, lname) VALUES ('JACK', 'FROST');
-INSERT INTO schedule(schedule_session, activitiy, datee, time_start ) VALUES ('123' ,'hello', '2001/17/08', '8:30');
+INSERT INTO client(fname,lname) VALUES ('Jack', 'Frost');
+INSERT INTO sched (sched_session, activity, datee, time_start) VALUES ('YOW', 'racing', '2023/08/16', '8:30');
+INSERT INTO trainor(trainor_name) VALUES ('John');
+
+SELECT client.fname, client.lname, sched.sched_session, sched.activity, sched.datee, sched.time_start, sched.time_end, trainor.trainor_name 
+FROM sched sched 
+INNER JOIN client  ON client.client_id = client.client_id 
+INNER JOIN trainor  ON trainor.trainor_id = trainor.trainor_id;
 
 
 
 -- INSERT INTO client(fname,lname)VALUES ('Jack', 'Frost');
--- INSERT INTO schedule(schedule_session,activity,datee,time_start) VALUES('bruh', 'moments', '8/19/2001', '8:15')
+-- INSERT INTO sched(sched_session,activity,datee,time_start) VALUES('bruh', 'moments', '8/19/2001', '8:15')
 
 
--- SELECT fname,lname FROM client INNER JOIN schedule ON schedule_session, activity, datee, time_start;
-
-
-
+-- SELECT fname,lname FROM client INNER JOIN sched ON sched_session, activity, datee, time_start;
 
 
 
 
--- SELECT  CONCAT(client.fname, ' ', client.lname) AS Full_Name,  schedule.schedule_session AS Session,schedule.activitiy AS Activity,schedule.datee AS Date,schedule.time_start AS Time_Start,trainor.trainor_name AS Name_of_Instructor
--- FROM  client INNER JOIN schedule ON client.client_id = schedule.client_id INNER JOIN trainor ON schedule.trainor_id = trainor.trainor_ID;
+
+
+
+-- SELECT  CONCAT(client.fname, ' ', client.lname) AS Full_Name,  sched.sched_session AS Session,sched.activitiy AS Activity,sched.datee AS Date,sched.time_start AS Time_Start,trainor.trainor_name AS Name_of_Instructor
+-- FROM  client INNER JOIN sched ON client.client_id = sched.client_id INNER JOIN trainor ON sched.trainor_id = trainor.trainor_ID;
