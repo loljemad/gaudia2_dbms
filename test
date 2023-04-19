@@ -4,72 +4,77 @@ CREATE DATABASE gymmanagement;
 USE gymmanagement;
 
 CREATE TABLE client (
-client_id int PRIMARY KEY AUTO_INCREMENT,
-fname varchar(255),
-lname varchar(255),
-gender ENUM ('female', 'male') DEFAULT 'male',
-age int,
-contact_add varchar(255),
-email varchar(255),
-password varchar (255)
+  client_id INT PRIMARY KEY AUTO_INCREMENT,
+  fname VARCHAR(255),
+  lname VARCHAR(255),
+  gender ENUM('female', 'male') DEFAULT 'male',
+  age INT,
+  contact_add VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255)
 );
 
 CREATE TABLE transaction_records (
-trans_id INT PRIMARY KEY AUTO_INCREMENT,
-trans_name varchar(255),
-client_id INT,
-amount int,
-datee DATE,
-CONSTRAINT FKclientID FOREIGN KEY(client_id)
-REFERENCES client(client_id)
+  trans_id INT PRIMARY KEY AUTO_INCREMENT,
+  trans_name VARCHAR(255),
+  client_id INT,
+  amount INT,
+  datee DATE,
+  CONSTRAINT FKclientID FOREIGN KEY (client_id)
+    REFERENCES client(client_id)
 );
 
 CREATE TABLE reports (
-report_id INT PRIMARY KEY AUTO_INCREMENT,
-total_amount varchar(255),
-datee DATE,
-client_id int,
-trans_id int,
- CONSTRAINT fkreportclientID FOREIGN KEY (client_id)
- REFERENCES client(client_id),
- CONSTRAINT FKtransID FOREIGN KEY (trans_id)
- REFERENCES transaction_records(trans_id)
-);
-
-CREATE TABLE schedule (
-sched_id INT PRIMARY KEY AUTO_INCREMENT,
-client_id INT,
-trainor_id INT,
-schedule_session varchar(255),
-activitiy varchar(255),
-datee DATE,
-time_start INT,
-time_end INT
-
+  report_id INT PRIMARY KEY AUTO_INCREMENT,
+  total_amount VARCHAR(255),
+  datee DATE,
+  client_id INT,
+  trans_id INT,
+  CONSTRAINT fkreportclientID FOREIGN KEY (client_id)
+    REFERENCES client(client_id),
+  CONSTRAINT FKtransID FOREIGN KEY (trans_id)
+    REFERENCES transaction_records(trans_id)
 );
 
 CREATE TABLE trainor (
-trainor_ID INT PRIMARY KEY AUTO_INCREMENT,
-trainor_name varchar(255),
-salary INT,
-email varchar(255),
-trainor_password varchar(255)
-
+  trainor_id INT PRIMARY KEY AUTO_INCREMENT,
+  trainor_name VARCHAR(255),
+  salary INT,
+  email VARCHAR(255),
+  trainor_password VARCHAR(255)
 );
 
 CREATE TABLE membership (
-mem_id INT PRIMARY KEY AUTO_INCREMENT,
-client_id INT,
-mem_status varchar(255),
-datee DATE
+  mem_id INT PRIMARY KEY AUTO_INCREMENT,
+  client_id INT,
+  mem_status VARCHAR(255),
+  datee DATE,
+  CONSTRAINT FKmemid FOREIGN KEY (client_id)
+    REFERENCES client(client_id)
 );
 
 CREATE TABLE payment (
-payment_id INT PRIMARY KEY AUTO_INCREMENT,
-client_id INT,
-datee DATE,
-amount INT
+  payment_id INT PRIMARY KEY AUTO_INCREMENT,
+  client_id INT,
+  datee DATE,
+  amount INT,
+  CONSTRAINT FKpaymentid FOREIGN KEY (client_id)
+    REFERENCES client(client_id)
+);
 
+CREATE TABLE schedule (
+  sched_id INT PRIMARY KEY AUTO_INCREMENT,
+  client_id INT,
+  trainor_id INT,
+  schedule_session VARCHAR(255),
+  activity VARCHAR(255),
+  datee DATE,
+  time_start TIME,
+  time_end TIME,
+  CONSTRAINT FKscheduled_client FOREIGN KEY (client_id)
+    REFERENCES client(client_id),
+  CONSTRAINT FKscheduled_trainor FOREIGN KEY (trainor_id)
+    REFERENCES trainor(trainor_id)
 );
 
 
