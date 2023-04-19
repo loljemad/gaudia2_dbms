@@ -17,10 +17,11 @@ password varchar (255)
 CREATE TABLE transaction_records (
 trans_id INT PRIMARY KEY AUTO_INCREMENT,
 trans_name varchar(255),
+client_id INT,
 amount int,
 datee DATE,
 CONSTRAINT FKclientID FOREIGN KEY(client_id)
-REFERENCES client(client_id),
+REFERENCES client(client_id)
 );
 
 CREATE TABLE reports (
@@ -44,25 +45,22 @@ activitiy varchar(255),
 datee DATE,
 time_start INT,
 time_end INT
-CONSTRAINT FKscheduleclientid FOREIGN KEY(client_id)
-REFERENCES client (client_id),
-CONSTRAINT FKtrainorid(trainor_id)
 
 );
 
 CREATE TABLE trainor (
 trainor_ID INT PRIMARY KEY AUTO_INCREMENT,
 trainor_name varchar(255),
-sched_id INT,
+
 salary INT,
 email varchar(255),
-trainor_password varchar(255),
+trainor_password varchar(255)
 
 );
 
 CREATE TABLE membership (
 mem_id INT PRIMARY KEY AUTO_INCREMENT,
-client_id INT FOREIGN KEY REFERENCES client(client_id),
+client_id INT,
 mem_status varchar(255),
 datee DATE
 );
@@ -73,4 +71,22 @@ client_id INT,
 datee DATE,
 amount INT
 
-)
+);
+
+
+
+
+-- INSERT INTO client(fname,lname)VALUES ('Jack', 'Frost');
+-- INSERT INTO schedule(schedule_session,activity,datee,time_start) VALUES('bruh', 'moments', '8/19/2001', '8:15')
+
+
+-- SELECT fname,lname FROM client INNER JOIN schedule ON schedule_session, activity, datee, time_start;
+
+
+
+
+
+
+
+-- SELECT  CONCAT(client.fname, ' ', client.lname) AS Full_Name,  schedule.schedule_session AS Session,schedule.activitiy AS Activity,schedule.datee AS Date,schedule.time_start AS Time_Start,trainor.trainor_name AS Name_of_Instructor
+-- FROM  client INNER JOIN schedule ON client.client_id = schedule.client_id INNER JOIN trainor ON schedule.trainor_id = trainor.trainor_ID;
