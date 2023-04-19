@@ -74,7 +74,9 @@ amount INT
 
 
 INSERT INTO client(fname, lname) VALUES ('JACK', 'FROST');
-INSERT INTO schedule(schedule_session, activity, datee, time_start) VALUES ('123', '123', 'HELL', '12/13/2001', '8:30')
+INSERT INTO schedule(schedule_session, activitiy, datee, time_start ) VALUES ('123' ,'hello', '2001/17/08', '8:30');
+
+
 
 -- INSERT INTO client(fname,lname)VALUES ('Jack', 'Frost');
 -- INSERT INTO schedule(schedule_session,activity,datee,time_start) VALUES('bruh', 'moments', '8/19/2001', '8:15')
