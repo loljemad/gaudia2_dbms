@@ -1,0 +1,68 @@
+DROP DATABASE students;
+CREATE DATABASE students;
+USE students;
+
+CREATE TABLE Student (
+    StudNo INT PRIMARY KEY AUTO_INCREMENT,
+    StudFName VARCHAR(255),
+    StudLname VARCHAR(255),
+    Major VARCHAR(255),
+    Gender VARCHAR(10),
+    HomeAddress VARCHAR(255)
+);
+
+CREATE TABLE Subjects(
+    SubjectCode varchar(20) PRIMARY KEY ,
+    SubjectDescr VARCHAR(255)
+);
+
+CREATE TABLE Grades (
+    StudNo INT,
+    SubjectCode VARCHAR(20),
+    Grade DECIMAL(3,2),
+    CONSTRAINT PK_Grades PRIMARY KEY (StudNo, SubjectCode),
+    CONSTRAINT FK_Grades_Student FOREIGN KEY (StudNo) REFERENCES Student(StudNo),
+    CONSTRAINT FK_Grades_Subjects FOREIGN KEY (SubjectCode) REFERENCES Subjects(SubjectCode)
+);
+
+
+
+
+
+
+
+INSERT INTO Student (StudFName, StudLname, Major, Gender, HomeAddress)
+VALUES
+    ('Ana', 'Cruz', 'ECE', 'F', 'Malolos Bulacan'),
+    ('Hazel', 'Ponce', 'coe', 'F', 'Plaridel Bulacan'),
+    ('Cristov', 'Concio', 'ECE', 'M', 'Malolos Bulacan'),
+    ('Aris', 'Clavio', 'ECE', 'F', 'Pulilan Bulacan');
+
+
+INSERT INTO Subjects (SubjectCode, SubjectDescr)
+VALUES
+    ('Chem 123', 'Chemest'),
+    ('MATH 122', 'trigonemetry'),
+    ('Math 122', 'Algebra'),
+ 
+
+ INSERT INTO grades (StudNo, SubjectCode, Grade) VALUES
+("2", "Chem 126", "2.00"),
+("1", "Chem 123", "2.00")
+
+
+SELECT CONCAT(StudFName, ' ', StudLname) AS FullName, HomeAddress
+FROM student
+WHERE Major = 'ECE' AND Gender = 'Female' AND HomeAddress LIKE '%Malolos, Bulacan%' ;
+
+
+SELECT CONCAT(StudLname, ', ', StudFName) AS StudentName, Major, SubjectDescr AS SubjectName, Grade
+FROM Student
+INNER JOIN Grades ON Student.StudNo = Grades.StudNo
+INNER JOIN Subjects ON Grades.SubjectCode = Subjects.SubjectCode
+WHERE Subjects.SubjectDescr = 'Math 122' AND Grades.Grade >= 2.0;
+
+
+SELECT CONCAT(StudLname, ', ', StudFName) AS FullName, Gender, HomeAddress
+FROM student
+WHERE Major = 'COE';
