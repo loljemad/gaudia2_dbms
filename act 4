@@ -6,6 +6,10 @@ SET total_amount = (
     WHERE m.mem_status = 'ACTIVE'
     AND m.client_id = reports.client_id
 )
+
+
+
+
 WHERE reports.client_id IN (
     SELECT client_id
     FROM membership
