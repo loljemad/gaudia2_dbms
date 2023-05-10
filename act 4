@@ -1,0 +1,35 @@
+UPDATE reports
+SET total_amount = (
+    SELECT SUM(tr.amount)
+    FROM transaction_records tr
+    INNER JOIN membership m ON m.client_id = tr.client_id
+    WHERE m.mem_status = 'ACTIVE'
+    AND m.client_id = reports.client_id
+)
+WHERE reports.client_id IN (
+    SELECT client_id
+    FROM membership
+    WHERE mem_status = 'ACTIVE'
+);
+
+
+
+
+UPDATE payment
+SET amount = 50
+WHERE client_id IN (
+    SELECT s.client_id
+    FROM sched s
+    INNER JOIN trainor t ON t.trainor_id = s.trainor_id
+    WHERE t.trainor_name = 'Instructor 1');
+
+
+DELETE FROM sched WHERE trainor_id (2,3);
+
+
+
+UPDATE membership SET mem_status = 'INACTIVE SHEEEEEESSH' WHERE client_id IN (
+SELECT client_id FROM sched WHERE trainor_id = 1);
+
+
+UPDATE sched SET trainor_id = 1 WHERE client_id = 2 ;
