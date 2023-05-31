@@ -1,0 +1,114 @@
+CREATE DATABASE databasemanagement;
+USE databasemanagement;
+
+CREATE TABLE students(
+    student_id int AUTO_INCREMENT,
+    StudNo varchar (6),
+    StudFName varchar (255),
+    StudLName varchar (255),
+    Major varchar (255),
+    Gender varchar (255),
+    HomeAddress varchar (255),
+    PRIMARY KEY (student_id)
+    );
+CREATE TABLE subject(
+    subjectid int AUTO_INCREMENT,
+    SubjectCode varchar (255),
+    StudentDescr varchar (255),
+	PRIMARY KEY (subjectid)
+);
+
+CREATE TABLE grade(
+    grade_id int AUTO_INCREMENT,
+    SubjectCode varchar (255),
+    student_id int,
+    subjectid int,
+    StudNo varchar (6),
+    grade float,
+    PRIMARY KEY (grade_id),
+    CONSTRAINT FK_StudentID FOREIGN KEY (student_id)
+    REFERENCES students (student_id),
+    CONSTRAINT FK_subbjectid FOREIGN KEY (subjectid)
+    REFERENCES subject (subjectid)
+);
+
+DROP DATABASE databasemanagement;
+CREATE DATABASE databasemanagement;
+USE databasemanagement;
+
+CREATE TABLE students(
+    student_id int AUTO_INCREMENT,
+    StudNo varchar (6),
+    StudFName varchar (255),
+    StudLName varchar (255),
+    Major varchar (255),
+    Gender varchar (255),
+    HomeAddress varchar (255),
+    PRIMARY KEY (student_id)
+    );
+CREATE TABLE subject(
+    subjectid int AUTO_INCREMENT,
+    SubjectCode varchar (255),
+    StudentDescr varchar (255),
+	PRIMARY KEY (subjectid)
+);
+
+CREATE TABLE grade(
+    grade_id int AUTO_INCREMENT,
+    SubjectCode varchar (255),
+    student_id int,
+    subjectid int,
+    StudNo varchar (6),
+    grade float,
+    PRIMARY KEY (grade_id),
+    CONSTRAINT FK_StudentID FOREIGN KEY (student_id)
+    REFERENCES students (student_id),
+    CONSTRAINT FK_subbjectid FOREIGN KEY (subjectid)
+    REFERENCES subject (subjectid)
+);
+
+INSERT INTO students (student_id, StudNo,StudFName,StudLName,Major,Gender,HomeAddress) VALUE 
+(1, 'S-101','Ana','Cruz','ECE','F','Malolos,Bulacan'),
+(2, 'S-102','Hazel','Ponce','COE','F','Plaridel,Bulacan'),
+(3, 'S-103','Cristov','Concio','ECE','M','Malolos,Bulacan'),
+(4,'S-104','Aris','Clavio','COE','M','Pulilan,Bulacan'),
+(5,'S-105','Honey','Pelayo','COE','F','Plaridel,Bulacan'),
+(6,'S-106','Carrie','Abao','ECE','F','Pulilan,Bulacan');
+
+INSERT INTO subject (SubjectCode,StudentDescr) VALUE 
+('Chem123','Chemistry'),
+('Math122','Trigonometry'),
+('Math123','Algebra');
+
+INSERT INTO grade (grade_id,StudNo,SubjectCode,grade) VALUE 
+(1,'S-101','Chem123',2.00),(2,'S-101','Math122',1.00),
+(3,'S-101','Math123',1.50),(4,'S-102','Chem123',1.75),
+(5,'S-102','Math122',1.25),(6,'S-102','Math123',1.50),
+(7,'S-103','Chem123',2.00),(8,'S-103','Math122',1.75),
+(9,'S-103','Math123',1.25),(10,'S-104','Chem123',1.25),
+(11,'S-104','Math122',2.25),(12,'S-104','Math123',2.50),
+(13,'S-105','Chem123',1.00),(14,'S-105','Math122',1.25),
+(15,'S-105','Math123',2.50),(16,'S-106','Chem123',1.25),
+(17,'S-106','Math122',1.50),(18,'S-106','Math123',1.75);
+
+
+SELECT s.StudNo, CONCAT(s.StudFName, ' ', s.StudLName) AS StudName, g.grade
+FROM students s
+JOIN grade g ON s.student_id = g.student_id
+JOIN (
+    SELECT grade
+    FROM grade
+    JOIN students ON grade.student_id = students.student_id
+    WHERE students.StudNo = 'S-102' AND grade.SubjectCode = 'Math123'
+) s102 ON g.grade > s102.grade
+WHERE g.SubjectCode = 'Math123';
+
+
+CREATE TABLE studenthighgrades AS
+SELECT DISTINCT s.StudNo, CONCAT(s.StudFName, ' ', s.StudLName) AS StudName, s.Major, s.Gender,
+       g1.grade AS Math123, g2.grade AS Chem123, g3.grade AS Math122
+FROM students s
+INNER JOIN grade g1 ON s.StudNo = g1.StudNo AND g1.SubjectCode = 'Math123'
+INNER JOIN grade g2 ON s.StudNo = g2.StudNo AND g2.SubjectCode = 'Chem123'
+INNER JOIN grade g3 ON s.StudNo = g3.StudNo AND g3.SubjectCode = 'Math122';
+
